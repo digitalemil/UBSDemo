@@ -1,0 +1,88 @@
+{
+  "id": "/team-a/spark",
+  "connected": true,
+  "recovered": false,
+  "TASK_UNREACHABLE": 0,
+  "cmd": "/sbin/init.sh",
+  "user": "root",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 1024,
+  "disk": 0,
+  "gpus": 0,
+  "backoffSeconds": 1,
+  "backoffFactor": 1.15,
+  "maxLaunchDelaySeconds": 3600,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mesosphere/spark:1.0.9-2.1.0-1-hadoop-2.6",
+      "network": "HOST",
+      "privileged": false,
+      "parameters": [
+        {
+          "key": "user",
+          "value": "root"
+        }
+      ],
+      "forcePullImage": true
+    }
+  },
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 5,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 10,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 2,
+      "path": "/",
+      "protocol": "HTTP",
+      "ignoreHttp1xx": false
+    }
+  ],
+  "upgradeStrategy": {
+    "minimumHealthCapacity": 1,
+    "maximumOverCapacity": 1
+  },
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 300,
+    "expungeAfterSeconds": 600
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "portDefinitions": [
+    {
+      "port": 10105,
+      "protocol": "tcp"
+    },
+    {
+      "port": 10106,
+      "protocol": "tcp"
+    },
+    {
+      "port": 10107,
+      "protocol": "tcp"
+    }
+  ],
+  "requirePorts": true,
+  "labels": {
+    "DCOS_PACKAGE_RELEASE": "25",
+    "DCOS_SERVICE_SCHEME": "http",
+    "DCOS_PACKAGE_SOURCE": "https://universe.mesosphere.com/repo",
+    "DCOS_PACKAGE_COMMAND": "eyJwaXAiOlsiaHR0cHM6Ly9kb3dubG9hZHMubWVzb3NwaGVyZS5jb20vc3BhcmsvYXNzZXRzLzEuMC45LTIuMS4wLTEvZGNvc19zcGFyay0wLjUuMTktcHkyLnB5My1ub25lLWFueS53aGwiXX0=",
+    "DCOS_PACKAGE_METADATA": "eyJwYWNrYWdpbmdWZXJzaW9uIjoiMy4wIiwibmFtZSI6InNwYXJrIiwidmVyc2lvbiI6IjEuMC45LTIuMS4wLTEiLCJtYWludGFpbmVyIjoic3VwcG9ydEBtZXNvc3BoZXJlLmlvIiwiZGVzY3JpcHRpb24iOiJTcGFyayBpcyBhIGZhc3QgYW5kIGdlbmVyYWwgY2x1c3RlciBjb21wdXRpbmcgc3lzdGVtIGZvciBCaWcgRGF0YS4gIERvY3VtZW50YXRpb246IGh0dHBzOi8vZG9jcy5tZXNvc3BoZXJlLmNvbS9zZXJ2aWNlLWRvY3Mvc3BhcmsvIiwidGFncyI6WyJiaWdkYXRhIiwibWFwcmVkdWNlIiwiYmF0Y2giLCJhbmFseXRpY3MiXSwic2VsZWN0ZWQiOnRydWUsInNjbSI6Imh0dHBzOi8vZ2l0aHViLmNvbS9hcGFjaGUvc3BhcmsuZ2l0Iiwid2Vic2l0ZSI6Imh0dHBzOi8vZG9jcy5tZXNvc3BoZXJlLmNvbS9zZXJ2aWNlLWRvY3Mvc3BhcmsvIiwiZnJhbWV3b3JrIjpmYWxzZSwicG9zdEluc3RhbGxOb3RlcyI6IkRDL09TIFNwYXJrIGlzIGJlaW5nIGluc3RhbGxlZCFcblxuXHREb2N1bWVudGF0aW9uOiBodHRwczovL2RvY3MubWVzb3NwaGVyZS5jb20vc2VydmljZS1kb2NzL3NwYXJrL1xuXHRJc3N1ZXM6IGh0dHBzOi8vZG9jcy5tZXNvc3BoZXJlLmNvbS9zdXBwb3J0LyIsInBvc3RVbmluc3RhbGxOb3RlcyI6IlRoZSBBcGFjaGUgU3BhcmsgREMvT1MgU2VydmljZSBoYXMgYmVlbiB1bmluc3RhbGxlZCBhbmQgd2lsbCBubyBsb25nZXIgcnVuLlxuUGxlYXNlIGZvbGxvdyB0aGUgaW5zdHJ1Y3Rpb25zIGF0IGh0dHBzOi8vZG9jcy5tZXNvc3BoZXJlLmNvbS9zZXJ2aWNlLWRvY3Mvc3BhcmsvdW5pbnN0YWxsLyB0byBjbGVhbiB1cCBhbnkgcGVyc2lzdGVkIHN0YXRlLiIsImxpY2Vuc2VzIjpbeyJuYW1lIjoiQXBhY2hlIExpY2Vuc2UgVmVyc2lvbiAyLjAiLCJ1cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vYXBhY2hlL3NwYXJrL21hc3Rlci9MSUNFTlNFIn1dLCJpbWFnZXMiOnsiaWNvbi1zbWFsbCI6Imh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuaW8vc3BhcmsvYXNzZXRzL2ljb24tc2VydmljZS1zcGFyay1zbWFsbC5wbmciLCJpY29uLW1lZGl1bSI6Imh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuaW8vc3BhcmsvYXNzZXRzL2ljb24tc2VydmljZS1zcGFyay1tZWRpdW0ucG5nIiwiaWNvbi1sYXJnZSI6Imh0dHBzOi8vZG93bmxvYWRzLm1lc29zcGhlcmUuaW8vc3BhcmsvYXNzZXRzL2ljb24tc2VydmljZS1zcGFyay1sYXJnZS5wbmcifX0=",
+    "DCOS_PACKAGE_REGISTRY_VERSION": "3.0",
+    "DCOS_SERVICE_NAME": "team-a-spark",
+    "DCOS_PACKAGE_FRAMEWORK_NAME": "team-a-spark",
+    "DCOS_SERVICE_PORT_INDEX": "2",
+    "DCOS_PACKAGE_VERSION": "1.0.9-2.1.0-1",
+    "SPARK_URI": "https://downloads.mesosphere.com/spark/assets/spark-2.1.0-1-bin-2.6.tgz",
+    "DCOS_PACKAGE_NAME": "team-a-spark",
+    "DCOS_PACKAGE_IS_FRAMEWORK": "false"
+  },
+  "env": {
+"DCOS_SERVICE_NAME": "team-a-spark",
+    "SPARK_DISPATCHER_MESOS_ROLE": "*",
+    "SPARK_USER": "root",
+    "SPARK_LOG_LEVEL": "INFO"
+  }
+}

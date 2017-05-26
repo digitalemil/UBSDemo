@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Mesosphere DC/OS AppStudio</title>
+
+</head>
+<body bgcolor="#FFFFFF">
+	<div id="alldiv">
+		<div>
+			<img id="bg" style="position: absolute; top: 0px; left: 0px;"
+				src="images/bgimg.jpg"> </img>
+		</div>
+		<div id="text" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+			<center>
+			<h2 onclick="location.href='bgimage.html'" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+					<%= name %> Version 2.0.0
+						</h2>
+		
+						<p><p>
+			
+						<p>
+					<button onclick="location.href='data.html'" style="width: 256px; font-size: 24px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Enter Data</button>  
+					<p> 
+					<button style="width: 256px; font-size: 24px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" onclick="location.href='cassandra.html'">Execute CQL</button>
+					<p>
+					<button style="width: 256px; font-size: 24px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" onclick="location.href='map.html'">Location Data</button>						
+					<p>
+					<button style="width: 256px; font-size: 24px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" onclick="location.href='zeppelin.html'">Download Notebook</button>						
+					<p>
+					<button style="width: 256px; font-size: 24px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" onclick="window.open('http://draw.io?url=http://digitalemil.de/DCOS-AppStudio.xml')">See Architecture</button>						
+					<p>
+					<button style="width: 256px; font-size: 24px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" onclick="window.open('http://<%= publicnodelg %>')">Load Generator</button>							
+					<p>
+					<button style="width: 256px; font-size: 24px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" onclick="alert('Secret: '+'<%= secret %>')">Reveal Secret</button>						
+					<p>
+					<button style="width: 256px; font-size: 24px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" onclick="window.open('http://<%= publicnodekibana %>')">Kibana</button>							
+			</center>
+			</br>
+		</div>
+	</div>
+	<script>
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		var sX = w / 1024;
+		var sY = h / 768;
+		var bgh = (768 * window.innerWidth / 1024);
+		var fields = 1;
+		var totalfields= 1;
+		var todelete = 1;
+
+		var bg = document.getElementById("bg");
+		bg.setAttribute("style",
+				"position:absolute; top:0px; left:0px; width: "
+						+ window.innerWidth + "px; height: " + bgh + "px;");
+		var text = document.getElementById("text");
+		text.setAttribute("style", "style=font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; position:absolute; top:" + (320 * sY)
+				+ "px; left:" + (((960 - 512 - 140) / 2) * sX) + "px; width: "
+				+ (512 * sX * 1.5) + "px; height: " + (256 * sY * 1.5) + "px;");
+
+	</script>
+
+</body>
+</html>

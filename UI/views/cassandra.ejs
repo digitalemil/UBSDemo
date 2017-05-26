@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Mesosphere DC/OS AppStudio</title>
+
+</head>
+<body bgcolor="#FFFFFF">
+	<div id="alldiv">
+		<div>
+			<img id="bg" style="position: absolute; top: 0px; left: 0px;"
+				src="images/bgimg.jpg"> </img>
+		</div>
+		<div id="text" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+			<h2 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+				<center>
+					<p>
+					<input id="cql" type="text" style="width: 60%; font-size: 24px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif" value="Select * from <%= keyspace %>.<%= table %>"></input>
+				
+					<button onclick="doExec()" style="width: 20%; font-size: 24px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Execute</button>  <p> 
+				
+					<textarea rows="15" id="data"
+					style="width: 80%; font-size: 12px; font-family: Courier New, Courier, monospace; resize: none; overflow-y: auto;" data-role="none"></textarea>	
+					<p>
+					<button onclick="document.getElementById('data').value='';" style="width: 20%; font-size: 24px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Clear</button>  <p> 
+					
+				</center>
+			</h2>
+			</br>
+		</div>
+	</div>
+	<script>
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		var sX = w / 1024;
+		var sY = h / 768;
+		var bgh = (768 * window.innerWidth / 1024);
+		var fields = 1;
+		var totalfields= 1;
+		var todelete = 1;
+		var bg = document.getElementById("bg");
+		var latitude= "0";
+		var longitude= "0";
+		
+		bg.setAttribute("style",
+				"position:absolute; top:0px; left:0px; width: "
+						+ window.innerWidth + "px; height: " + bgh + "px;");
+		
+		var text = document.getElementById("text");
+		text.setAttribute("style", "style=font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; position:absolute; top:" + (320 * sY)
+				+ "px; left:" + (((960 - 512 - 140) / 2) * sX) + "px; width: "
+				+ (512 * sX * 1.5) + "px; height: " + (256 * sY * 1.5) + "px;");
+
+
+function doExec() { 
+	let cql= document.getElementById("cql").value;
+    	postJSON(cql);
+  }
+
+  function postJSON(cql) {
+                        if (window.XMLHttpRequest) {
+                                try {
+                                        req = new XMLHttpRequest();
+                                } catch (e) {
+                                        req = false;
+                                }
+                                // branch for IE/Windows ActiveX version
+                        } else {
+                                if (window.ActiveXObject) {
+                                        try {
+                                                req = new ActiveXObject("Msxml2.XMLHTTP");
+                                        } catch (e) {
+                                                try {
+                                                        req = new ActiveXObject("Microsoft.XMLHTTP");
+                                                } catch (e) {
+                                                        req = false;
+                                                }
+                                        }
+                                }
+                        }
+                        if (req) {
+				
+                                req.onreadystatechange = function() {
+					if (req.readyState == 4) {
+						document.getElementById("data").value= req.responseText;
+					}
+				}
+                                req.open("GET", "cql?cmd="+cql, true);
+                                req.setRequestHeader("Content-type", "application/json"); 
+								req.send();                      
+					            //req.send(json);
+                        } else {
+                                alert("req== false");
+                        }
+                }
+
+				function cqlSent() {
+                        console.log("JSON sent: "+json);
+                }
+  </script>
+
+</body>
+</html>
